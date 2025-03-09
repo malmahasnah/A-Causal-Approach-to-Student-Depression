@@ -59,8 +59,7 @@
           LASSO regression is used to select features because of how it zeroes out coefficients that are not as important. It minimizes a cost function that uses Mean Squared Error and a L1 penalty term, found by summing the absolute
           values of the coefficiences multiplied by a lambda. 
 
-          <img src="images/lasso-regression.webp" alt="LASSO loss function">
-
+          
         </p>
 
           <h3>Peter-Clark (PC) Algorithm</h3>
@@ -76,7 +75,7 @@
         <p>
           Fisher's z-Test
 
-          <img src="images/fishersztest.png" alt="Fisher's z-test formula">
+          
         </p>
         
         <h4>Chi-Squared Test</h4>
@@ -92,11 +91,27 @@
 
         <h2>Results and Conclusion</h2>
 
-        <h3>Peter-Clark (PC) Algorithm</h3>
-        <p>TODO, include plots and graphs to easily visualize results</p>
+        <h2>Results and Conclusion</h2>
 
-        <h3> FCI with Kernel-based Conditiontal Independence Test (Fast KCI)</h3>
-        <p>TODO, include plots and graphs to easily visualize results</p>
+        <h3>Peter-Clark (PC) Algorithm</h3>
+        <p>Below is the causal graph generated using the PC-KCI algorithm:</p>
+        <img src="images/PC-KCI-Mgraph.png" alt="PC-KCI Graph" width="600">
+
+        <h3>FCI with Kernel-based Conditional Independence Test (Fast KCI)</h3>
+        <p>Below is the causal graph generated using the Fast KCI algorithm:</p>
+        <img src="images/Fast KCI-hierarc-MGraph.png" alt="Fast KCI Graph" width="600">
+
+        <h3>Counterfactual Analysis</h3>
+        <p>The following images depict different counterfactual scenarios analyzed:</p>
+        <img src="images/counterfactual-FS.png" alt="Counterfactual FS" width="400">
+        <img src="images/counterfactual-SD.png" alt="Counterfactual SD" width="400">
+        <img src="images/counterfactual-ST.png" alt="Counterfactual ST" width="400">
+        <img src="images/counterfactual-AP.png" alt="Counterfactual AP" width="400">
+        
+        <h3>Chi-Squared Test</h3>
+        <p>The chi-squared independence test results are visualized below:</p>
+        <img src="images/chi-squared-mgraph.png" alt="Chi-Squared Test Graph" width="600">
+
 
 
         <h2>Ethical Considerations and Limitations to Generalization</h2>
