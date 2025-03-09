@@ -91,19 +91,25 @@
         
 
         <h2>Results and Conclusion</h2>
-
+        <p>
         Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. Fisher’s Z and Chi-Squared used all 27,900+ samples, while KCI was limited to 500 due to its high computational cost.
-
+        </p>
+        <p>
         In the Chi-Squared causal graph, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, suggesting a hidden confounder. Patna has a direct link to both Depression and Suicidal Thoughts, while Depression unexpectedly points to Ahmedabad.
-
+        </p>
+        <p>
         The Fisher’s Z graph  shows Depression linked to Academic Pressure, Financial Stress, Suicidal Thoughts, and Dietary Habits, suggesting depression may worsen eating habits. Academic Pressure leads to Financial Stress, which then connects to Suicidal Thoughts, possibly indicating a chain reaction. Depression also points to Hyderabad and Ahmedabad, though the reason is unclear.
-
+        </p>
+        <p>
         Key findings across all methods highlight three consistent factors influencing Depression: Academic Pressure, Financial Stress, and Suicidal Thoughts. These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
-
+       </p>
+       <p>
         We also identified that while Depression and Unhealthy Eating Habits are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
-
+        </p>
+        <p>
         After identifying these relationships, we proceeded with counterfactual computing where the results can be seen below.
-
+        </p>
+        
         <h3>Peter-Clark (PC) Algorithm with fischerz</h3>
         <p>Below is the causal graph generated using the PC-KCI algorithm:</p>
         <img src="images/Fisher Z-Mgraph.png" alt="PC-KCI Graph" width="600">
@@ -131,6 +137,13 @@
         
  
 
+        <h2>Discussion and Conclusion</h2>
+        <p>
+        The study identified four key factors closely linked to depression: academic pressure, unhealthy eating habits, financial stress, and suicidal thoughts. Academic pressure emerged as the strongest contributor, which aligns with our focus on students. Surprisingly, financial stress had a much smaller impact than expected. While financial security may provide some relief, it seems to matter less than the daily academic challenges students face. This raises questions about how students perceive financial stress—whether schools provide adequate support or if shared financial struggles create a sense of camaraderie.
+        </p>
+        <p>
+          Our findings highlight one clear takeaway: excessive academic pressure significantly increases the risk of depression. While financial stress plays a role, its effect is much smaller. Students with more financial support may handle slightly heavier workloads, but academic pressure remains the dominant factor. When choosing a school or major, students should prioritize their mental well-being and consider the potential stress levels involved.
+        </p>
 
         <h2>Ethical Considerations and Limitations to Generalization</h2>
         
