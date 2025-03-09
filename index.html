@@ -65,47 +65,52 @@
 
           <h4>Fisher's z-Test</h4>
             <p>
-              Fisher’s Z test assumes the data follows a normal distribution and measures how two variables relate when controlling for others. If the test finds them independent, the edge between them is removed; otherwise, it is kept.
+              One of the options we used for the Conditional Independence Test when running PC is the Fisher’s
+              Z test. Fisher’s Z test assumes the data follows a normal distribution and measures how two variables relate when controlling for others. If the test finds them independent, the edge between them is removed; otherwise, it is kept.
             </p>
           
           <h4>Chi-Squared Test</h4>
             <p>
-              The Chi-squared test determines whether two categorical variables are independent. It compares observed and expected values, removing edges when independence is detected.
+              Another option we used for the Conditional Independence Test when running PC is the Chi-squared test. The Chi-squared test determines whether two categorical variables are independent. It compares observed and expected values, removing edges when independence is detected.
             </p>
           <h4>KCI</h4>
             <p>
               KCI uses kernel methods to detect complex, non-linear dependencies. It maps data into a higher-dimensional space and applies a statistical test to determine if variables are conditionally independent. Due to its high computational cost, we applied this test to a limited sample size.
             </p>
           <h4> FCI with Kernel-based Conditiontal Independence Test (Fast KCI)</h4>
-
             <p>
             FCI differs from PC by accounting for hidden confounders. It follows a similar process but produces a Partial Ancestral Graph that reflects possible unobserved variables. The fast KCI method makes this approach more efficient, allowing for larger datasets.
             </p>
-          <h4> FCI with Kernel-based Conditiontal Independence Test (Fast KCI)</h4>
+          <h4>Counterfactual Computing</h4>
             <p>
               Counterfactual computing estimates alternative outcomes by simulating interventions. For example, it can predict how changing academic pressure might affect depression levels in students. This method helps analyze both direct and hypothesized causal effects on depression.
             </p>
           
         </p>
 
-        <h4>Counterfactual Computing</h4>
         
 
         <h2>Results and Conclusion</h2>
 
         <h2>Results and Conclusion</h2>
 
-        <h3>Peter-Clark (PC) Algorithm</h3>
+        <h3>Peter-Clark (PC) Algorithm with fischerz</h3>
         <p>Below is the causal graph generated using the PC-KCI algorithm:</p>
+        <img src="images/Fisher Z-Mgraph.png" alt="PC-KCI Graph" width="600">
+
+        <h3>Peter-Clark (PC) Algorithm with Chi-Squared</h3>
+        <p>The chi-squared independence test results are visualized below:</p>
+        <img src="images/chi-squared-mgraph.png" alt="Chi-Squared Test Graph" width="600">
+
+        <h3>KCI</h3>
+        <p>Below is the causal graph generated using the KCI algorithm:</p>
         <img src="images/PC-KCI-Mgraph.png" alt="PC-KCI Graph" width="600">
 
         <h3>FCI with Kernel-based Conditional Independence Test (Fast KCI)</h3>
         <p>Below is the causal graph generated using the Fast KCI algorithm:</p>
         <img src="images/Fast KCI-hierarc-MGraph.png" alt="Fast KCI Graph" width="600">
 
-        <h3>Chi-Squared Test</h3>
-        <p>The chi-squared independence test results are visualized below:</p>
-        <img src="images/chi-squared-mgraph.png" alt="Chi-Squared Test Graph" width="600">
+
 
         <h3>Counterfactual Analysis</h3>
         <p>The following images depict different counterfactual scenarios analyzed:</p>
