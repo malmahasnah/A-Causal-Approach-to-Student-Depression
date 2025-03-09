@@ -92,7 +92,17 @@
 
         <h2>Results and Conclusion</h2>
 
-        <h2>Results and Conclusion</h2>
+        Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. Fisher’s Z and Chi-Squared used all 27,900+ samples, while KCI was limited to 500 due to its high computational cost.
+
+        In the Chi-Squared causal graph, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, suggesting a hidden confounder. Patna has a direct link to both Depression and Suicidal Thoughts, while Depression unexpectedly points to Ahmedabad.
+
+        The Fisher’s Z graph  shows Depression linked to Academic Pressure, Financial Stress, Suicidal Thoughts, and Dietary Habits, suggesting depression may worsen eating habits. Academic Pressure leads to Financial Stress, which then connects to Suicidal Thoughts, possibly indicating a chain reaction. Depression also points to Hyderabad and Ahmedabad, though the reason is unclear.
+
+        Key findings across all methods highlight three consistent factors influencing Depression: Academic Pressure, Financial Stress, and Suicidal Thoughts. These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
+
+        We also identified that while Depression and Unhealthy Eating Habits are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
+
+        After identifying these relationships, we proceeded with counterfactual computing where the results can be seen below.
 
         <h3>Peter-Clark (PC) Algorithm with fischerz</h3>
         <p>Below is the causal graph generated using the PC-KCI algorithm:</p>
