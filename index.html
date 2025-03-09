@@ -19,7 +19,7 @@
     
         
         <ul>
-          <li><a href="...">View<strong>Poster</strong></a></li>
+          <li><a href="https://drive.google.com/file/d/1U2KvmUpI8iYD-kt4278XEywh6m8FqbZI/view?usp=sharing">View<strong>Poster</strong></a></li>
           <li><a href="...">View<strong>Report</strong></a></li>
           <li><a href="https://github.com/malmahasnah/capstone-artifact-directory">View<strong>GitHub</strong></a></li>
         </ul>
@@ -48,21 +48,35 @@
           
         </p>
 
-        <p><em>View the <a href="http://github.github.com/github-flavored-markdown/sample_content.html">source of this content</a>.</em></p>
+        <p><em>View the <a href="https://www.kaggle.com/datasets/hopesb/student-depression-dataset">source of this content</a>.</em></p>
 
       
         <h2>Methodology</h2>
         <p>
           <h3>Feature Selection using LASSO</h3>
         <p>
-          TODO
+          The dataset had 111 indiviudal features, so we had to choose a subset of them we would focus on. We used LASSO feature selection to pick the most variables that will tell us the most information on a depressed individual.
+          LASSO regression is used to select features because of how it zeroes out coefficients that are not as important. It minimizes a cost function that uses Mean Squared Error and a L1 penalty term, found by summing the absolute
+          values of the coefficiences multiplied by a lambda. 
+
+          <img src="images/lasso-regression.webp" alt="LASSO loss function">
+
         </p>
 
           <h3>Peter-Clark (PC) Algorithm</h3>
+          <p> 
+            We used the Peter-Clark algorithm for causal discovery, to try and identify the underlying cause-and-effect relationships from our observational data.
+            PC algorithm first starts with a complete, undirected graph with all variables connected. Then, it goes through and recursively deletes edges based on conditional independence decisions.
+            If we look at an edge between A and B, if there is a set S without A and B, then we remove that edge, if this is true when S, A, and B are independent.
 
-        <h4>Fisher Z Test</h4>
+            Peter-Clark Algorithm can be used with different independence tests to find true independence relationships.
+          </p>
+
+        <h4>Fisher's z-Test</h4>
         <p>
-          TODO
+          Fisher's z-Test
+
+          <img src="images/fishersztest.png" alt="Fisher's z-test formula">
         </p>
         
         <h4>Chi-Squared Test</h4>
