@@ -49,41 +49,60 @@
         </p>
 
         <p><em>View the <a href="https://www.kaggle.com/datasets/hopesb/student-depression-dataset">source of this content</a>.</em></p>
-
+        <p>
+          The data we used is a Kaggle dataset on student depression. 
+          It contains 27,902 entries with each entry being a different student from K12 to PhD in different Indian cities.
+          The dataset has 18 columns with each representing a different feature. Features include <b>Age</b>, <b>Gender</b>, <b>City</b>, <b>CGPA</b>, <b>Profession</b>, <b>Academic Pressure</b>, <b>Dietary Habits</b>, <b>Sleep Duration</b>, and more.
+          We had to one hot code some columns to make them more workable with our causal discovery algorithms, which lead to the feature count reaching 111.
+        </p>
       
         <h2>Methodology</h2>
         <p>
           <h3>Feature Selection using LASSO</h3>
             <p>
-            Starting with 111 variables, we used LASSO feature selection to pick the most important ones. LASSO regression helps identify the most relevant features by shrinking less important coefficients to zero, improving interpretability. It minimizes a cost function that combines the sum of squared residuals and an L1 penalty. 
+            Starting with 111 variables, we used LASSO feature selection to pick the most important ones.
+            LASSO regression helps identify the most relevant features by shrinking less important coefficients to zero, improving interpretability. 
+            It minimizes a cost function that combines the sum of squared residuals and an L1 penalty. 
             </p>
 
           <h3>Peter-Clark (PC) Algorithm</h3>
             <p> 
-              The PC Algorithm infers causal relationships under the assumption of no hidden confounders. It starts with a fully connected graph and removes edges based on a conditional independence test. It then iteratively tests independence with increasing conditioning sets and directs remaining edges using colliders. The final output is a partially directed acyclic graph, though results may vary slightly across runs.
+              The PC Algorithm infers causal relationships under the assumption of no hidden confounders. 
+              It starts with a fully connected graph and removes edges based on a conditional independence test. 
+              It then iteratively tests independence with increasing conditioning sets and directs remaining edges using colliders. 
+              The final output is a partially directed acyclic graph, though results may vary slightly across runs.
             </p>
 
           <h4>Fisher's z-Test</h4>
             <p>
               One of the options we used for the Conditional Independence Test when running PC is the Fisher’s
-              Z test. Fisher’s Z test assumes the data follows a normal distribution and measures how two variables relate when controlling for others. If the test finds them independent, the edge between them is removed; otherwise, it is kept.
+              Z test. Fisher’s Z test assumes the data follows a normal distribution and measures how two variables relate when controlling for others.
+              If the test finds them independent, the edge between them is removed; otherwise, it is kept.
             </p>
           
           <h4>Chi-Squared Test</h4>
             <p>
-              Another option we used for the Conditional Independence Test when running PC is the Chi-squared test. The Chi-squared test determines whether two categorical variables are independent. It compares observed and expected values, removing edges when independence is detected.
+              Another option we used for the Conditional Independence Test when running PC is the Chi-squared test. 
+              The Chi-squared test determines whether two categorical variables are independent. 
+              It compares observed and expected values, removing edges when independence is detected.
             </p>
           <h4>KCI</h4>
             <p>
-              KCI uses kernel methods to detect complex, non-linear dependencies. It maps data into a higher-dimensional space and applies a statistical test to determine if variables are conditionally independent. Due to its high computational cost, we applied this test to a limited sample size.
+              KCI uses kernel methods to detect complex, non-linear dependencies. 
+              It maps data into a higher-dimensional space and applies a statistical test to determine if variables are conditionally independent. 
+              Due to its high computational cost, we applied this test to a limited sample size.
             </p>
           <h4> FCI with Kernel-based Conditiontal Independence Test (Fast KCI)</h4>
             <p>
-            FCI differs from PC by accounting for hidden confounders. It follows a similar process but produces a Partial Ancestral Graph that reflects possible unobserved variables. The fast KCI method makes this approach more efficient, allowing for larger datasets.
+            FCI differs from PC by accounting for hidden confounders. 
+            It follows a similar process but produces a Partial Ancestral Graph that reflects possible unobserved variables. 
+            The fast KCI method makes this approach more efficient, allowing for larger datasets.
             </p>
           <h4>Counterfactual Computing</h4>
             <p>
-              Counterfactual computing estimates alternative outcomes by simulating interventions. For example, it can predict how changing academic pressure might affect depression levels in students. This method helps analyze both direct and hypothesized causal effects on depression.
+              Counterfactual computing estimates alternative outcomes by simulating interventions. 
+              For example, it can predict how changing academic pressure might affect depression levels in students. 
+              This method helps analyze both direct and hypothesized causal effects on depression.
             </p>
           
         </p>
@@ -92,34 +111,34 @@
 
         <h2>Results</h2>
         <p>
-        Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. Fisher’s Z and Chi-Squared used all 27,900+ samples, while Fast KCI was limited to 2000, and KCI to 500 due to its high computational cost.
-        </p>
-        <p>
-        In the Chi-Squared causal graph, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, suggesting a hidden confounder. Patna has a direct link to both Depression and Suicidal Thoughts, while Depression unexpectedly points to Ahmedabad.
-        </p>
-        <p>
-        The Fisher’s Z graph  shows Depression linked to Academic Pressure, Financial Stress, Suicidal Thoughts, and Dietary Habits, suggesting depression may worsen eating habits. Academic Pressure leads to Financial Stress, which then connects to Suicidal Thoughts, possibly indicating a chain reaction. Depression also points to Hyderabad and Ahmedabad, though the reason is unclear.
-        </p>
-        <p>
-        Key findings across all methods highlight three consistent factors influencing Depression: **Academic Pressure**, **Financial Stress**, and **Suicidal Thoughts**. These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
-       </p>
-       <p>
-        We also identified that while **Depression** and **Unhealthy Eating Habits** are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
+        Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. 
+        Fisher’s Z and Chi-Squared used all 27,900+ samples, while Fast KCI was limited to 2000, and KCI to 500 due to its high computational cost.
         </p>
 
+        <p>
+          The <u>Fisher’s z graph</u> shows Depression linked to Academic Pressure, Financial Stress, Suicidal Thoughts, and Dietary Habits, suggesting depression may worsen eating habits. 
+          Academic Pressure leads to Financial Stress, which then connects to Suicidal Thoughts, possibly indicating a chain reaction. Depression also points to Hyderabad and Ahmedabad, though the reason is unclear.
+          </p>
+          <p></p>
+          <img src="images/Fisher Z-Mgraph.png" alt="PC-KCI Graph" width="300">
+          <figcaption>Figure 1: PC with Fisher Z Graph</figcaption>
+          <p></p>
+          <hr>
+        <p>
+        In the <u>Chi-Squared causal graph</u>, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, suggesting a hidden confounder. 
+        Patna has a direct link to both Depression and Suicidal Thoughts, while Depression unexpectedly points to Ahmedabad.
+        </p>
         
-
-        <p></p>
-        <img src="images/Fisher Z-Mgraph.png" alt="PC-KCI Graph" width="300">
-        <figcaption>Figure 1: PC with Fisher Z Graph</figcaption>
-        <p></p>
-        <hr>
-
         <p>The chi-squared independence test results are visualized below:</p>
         <img src="images/chi-squared-mgraph.png" alt="Chi-Squared Test Graph" width="600">
         <figcaption>Figure 2: PC with Chi-Squared Graph</figcaption>
         <p></p>
         <hr>
+
+        <p>
+          In both of our <u>fast and regular KCI graphs</u>, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, which reinforces the idea of a hidden confounder. 
+          The other interesting here to note is that these three also are bidirected to Dietary Habits (Others), which continues to suggest that depression adjacent factors can result in irregular eating habits or vice-versa.
+        </p>
 
         <p>Below is the causal graph generated using the KCI algorithm:</p>
         <img src="images/PC-KCI-Mgraph.png" alt="PC-KCI Graph" width="600">
@@ -133,40 +152,51 @@
         <p></p>
         <hr>
 
+        <p>
+          Key findings across all methods highlight three consistent factors influencing Depression: <b>Academic Pressure</b>, <b>Financial Stress</b>, and <b>Financial Stress</b>. 
+          These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
+         </p>
+         <p>
+          We also identified that while Depression and <b>Unhealthy Eating Habits</b> are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
+          </p>
+      
         <p>The following images depict different counterfactual scenarios analyzed:</p>
 
         <img src="images/counterfactual-FS.png" alt="Counterfactual FS" width="400">
         <figcaption>Financial Stress Intervention (original observed value: 1)</figcaption>
-        
-        <img src="images/counterfactual-SD.png" alt="Counterfactual SD" width="400">
-        <figcaption>Sleep Duration Intervention (original observed value: \<\ 5 Hours)</figcaption>
-
-        
+        <hr>
         <img src="images/counterfactual-ST.png" alt="Counterfactual ST" width="400">
         <figcaption>Suicidal Thoughts Intervention (original observed value: 1)</figcaption>
-
-        
-        <img src="images/counterfactul-AP.png" alt="Counterfactual AP" width="400">
+        <hr>
+        <img src="images/counterfactual-AP.png" alt="Counterfactual AP" width="400">
         <figcaption>Academic Pressure Intervention (original observed value: 5)</figcaption>
-        
+        <hr>
         <img src="images/counterfactual-SD.png" alt="Counterfactual SD" width="400">
-        <figcaption>Sleep Duration Intervention (original observed value: \<\ 5 Hours)</figcaption>
+        <figcaption>Sleep Duration Intervention (original observed value: &lt 5 Hours)</figcaption>
+        <hr>
+
+        <p>
+          We did counterfactual reasoning on the most robust factors we found from doing causal discovery algorithms to see the strength of the connection between the feature and Depression.
+          <b>Academic Pressure </b>and <b>Suicidal Thoughts</b> made a significant difference in the score for Depression (the original observed value for Academic Pressure was 5, and 1 for Suicidal Thoughts).
+           <b>Financial Stress</b> had an orignial observed value of 1, and made less of a difference on the Depression score.
+        </p>
+        <p>
+          Additionally, we did counterfactual with sleep duration as the intervention, because it was one of the variables that we thought would be important, but did not pass the LASSO feature selection.
+          The fact that the Sleep Duration changing did not heavily sway depression hints towards our LASSO selection being robust in picking out good variables. 
+        </p>
 
         <h2>Discussion and Conclusion</h2>
         <p>
-        The study identified four key factors closely linked to depression: **Academic Pressure**, **Unhealthy Eating Habits**, **Financial Stress**, and **Suicidal Thoughts**. 
+        The study identified four key factors closely linked to depression: <b>Academic Pressure</b>, <b>Unhealthy Eating Habits</b>, <b>Financial Stress</b>, and <b>Suicidal Thoughts</b>. 
         <b>Academic Pressure</b> emerged as the strongest contributor, which aligns with our focus on students. 
-        Surprisingly, **Financial Stress** had a much smaller impact than expected. While financial security may provide some relief, it seems to matter less than the daily academic challenges students face. 
+        Surprisingly, <b>Financial Stress</b> had a much smaller impact than expected. While financial security may provide some relief, it seems to matter less than the daily academic challenges students face. 
         This raises questions about how students perceive financial stress—whether schools provide adequate support or if shared financial struggles create a sense of camaraderie.
         </p>
         <p>
-          Our findings highlight one clear takeaway: excessive academic pressure significantly increases the risk of depression. While financial stress plays a role, its effect is much smaller. Students with more financial support may handle slightly heavier workloads, but academic pressure remains the dominant factor. When choosing a school or major, students should prioritize their mental well-being and consider the potential stress levels involved.
+          Our findings highlight one clear takeaway: excessive academic pressure significantly increases the risk of depression. While financial stress plays a role, its effect is much smaller. 
+          Students with more financial support may handle slightly heavier workloads, but academic pressure remains the dominant factor. When choosing a school or major, students should prioritize their mental well-being and consider the potential stress levels involved.
         </p>
-        <p>
-          We did counterfactual reasoning on the most robust factors we found from doing causal discovery algorithms to see the strength of the connection between the feature and Depression.
-          The results show that the Depression value is heavily swayed whenever we change one of these factors. Additionally, we did counterfactual with sleep duration as the intervention, because it was one of the variables that we thought would be important, but did not pass the LASSO feature selection.
-          The fact that the Sleep Duration changing did not heavily sway depression hints towards our LASSO selection being robust in picking out good variables. 
-        </p>
+
 
         <h2>Ethical Considerations and Limitations to Generalization</h2>
           <p>
