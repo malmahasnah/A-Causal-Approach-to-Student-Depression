@@ -1,4 +1,7 @@
-# Minimal Theme
+# A Causal Approach to Student Depression
+
+Website for 2025 Capstone Project by Maryam Almahasnah, Hunter Brownell, and Kevin Chan
+Made by forking minimal theme 
 
 [Demo the Theme](https://orderedlist.com/minimal/)
 
