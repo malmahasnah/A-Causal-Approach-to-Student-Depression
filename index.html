@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Minimal by Steve Smith</title>
+    <title>A Causal Approach to Understanding Student Depression</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -90,9 +90,9 @@
 
         
 
-        <h2>Results and Conclusion</h2>
+        <h2>Results</h2>
         <p>
-        Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. Fisher’s Z and Chi-Squared used all 27,900+ samples, while KCI was limited to 500 due to its high computational cost.
+        Using the 13 features selected by LASSO, we ran the Peter-Clark Algorithm with Fisher’s Z, Chi-Squared, and KCI tests. Fisher’s Z and Chi-Squared used all 27,900+ samples, while Fast KCI was limited to 2000, and KCI to 500 due to its high computational cost.
         </p>
         <p>
         In the Chi-Squared causal graph, Depression is bi-directed with Academic Pressure, Financial Stress, and Unhealthy Dietary Habits, suggesting a hidden confounder. Patna has a direct link to both Depression and Suicidal Thoughts, while Depression unexpectedly points to Ahmedabad.
@@ -101,10 +101,10 @@
         The Fisher’s Z graph  shows Depression linked to Academic Pressure, Financial Stress, Suicidal Thoughts, and Dietary Habits, suggesting depression may worsen eating habits. Academic Pressure leads to Financial Stress, which then connects to Suicidal Thoughts, possibly indicating a chain reaction. Depression also points to Hyderabad and Ahmedabad, though the reason is unclear.
         </p>
         <p>
-        Key findings across all methods highlight three consistent factors influencing Depression: Academic Pressure, Financial Stress, and Suicidal Thoughts. These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
+        Key findings across all methods highlight three consistent factors influencing Depression: **Academic Pressure**, **Financial Stress**, and **Suicidal Thoughts**. These variables consistently appear as "parents" of Depression, suggesting they are likely causes rather than effects.
        </p>
        <p>
-        We also identified that while Depression and Unhealthy Eating Habits are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
+        We also identified that while **Depression** and **Unhealthy Eating Habits** are related, eating habits appear as a "child" of Depression, suggesting they are more likely a consequence rather than a cause.
         </p>
         <p>
         After identifying these relationships, we proceeded with counterfactual computing where the results can be seen below.
@@ -131,21 +131,34 @@
         <h3>Counterfactual Analysis</h3>
         <p>The following images depict different counterfactual scenarios analyzed:</p>
         <img src="images/counterfactual-FS.png" alt="Counterfactual FS" width="400">
-        <img src="images/counterfactual-SD.png" alt="Counterfactual SD" width="400">
         <img src="images/counterfactual-ST.png" alt="Counterfactual ST" width="400">
         <img src="images/counterfactual-AP.png" alt="Counterfactual AP" width="400">
+        <img src="images/counterfactual-SD.png" alt="Counterfactual SD" width="400">
         
  
 
         <h2>Discussion and Conclusion</h2>
         <p>
-        The study identified four key factors closely linked to depression: academic pressure, unhealthy eating habits, financial stress, and suicidal thoughts. Academic pressure emerged as the strongest contributor, which aligns with our focus on students. Surprisingly, financial stress had a much smaller impact than expected. While financial security may provide some relief, it seems to matter less than the daily academic challenges students face. This raises questions about how students perceive financial stress—whether schools provide adequate support or if shared financial struggles create a sense of camaraderie.
+        The study identified four key factors closely linked to depression: **Academic Pressure**, **Unhealthy Eating Habits**, **Financial Stress**, and **Suicidal Thoughts**. 
+        **Academic Pressure** emerged as the strongest contributor, which aligns with our focus on students. 
+        Surprisingly, **Financial Stress** had a much smaller impact than expected. While financial security may provide some relief, it seems to matter less than the daily academic challenges students face. 
+        This raises questions about how students perceive financial stress—whether schools provide adequate support or if shared financial struggles create a sense of camaraderie.
         </p>
         <p>
           Our findings highlight one clear takeaway: excessive academic pressure significantly increases the risk of depression. While financial stress plays a role, its effect is much smaller. Students with more financial support may handle slightly heavier workloads, but academic pressure remains the dominant factor. When choosing a school or major, students should prioritize their mental well-being and consider the potential stress levels involved.
         </p>
+        <p>
+          We did counterfactual reasoning on the most robust factors we found from doing causal discovery algorithms to see the strength of the connection between the feature and Depression.
+          The results show that the Depression value is heavily swayed whenever we change one of these factors. Additionally, we did counterfactual with sleep duration as the intervention, because it was one of the variables that we thought would be important, but did not pass the LASSO selection.
+          The fact that the sleep duration changing did not heavily sway depression hints towards our LASSO selection being robust and picking out good variables. 
+        </p>
 
         <h2>Ethical Considerations and Limitations to Generalization</h2>
+          <p>
+            The dataset suffers from a lack of diversity, as all of its data comes from cities in India. So we can not fully say that it generalizes to broader population.
+            Additionally, the students who were surveyed come from as young as K12 students to PhD students, which poses a different restriction what population our findings refer to.
+            Features like "Dietary Habits - Others" are very vague and are hard to interpret. Though they did not end up getting past LASSO regardless.
+          </p>
         
         <h2>References and Acknowledgements</h2>
         
